@@ -1,3 +1,49 @@
-# eslint-transforms
-Codemods for the ESLint ecosystem
+# ESLint Transforms
 
+A collection of jscodeshift transforms to help upgrade ESLint rules to new versions of [ESLint](https://github.com/eslint/eslint).
+
+## Installation
+
+Clone this repository and install its dependencies:
+
+```
+$ git clone https://github.com/eslint/eslint-transforms.git
+$ npm install
+```
+
+## Usage
+
+```
+npm run <transform-name> -- <path>
+```
+
+Where:
+
+`transform-name` - Name of the transform you want to run (e.g. `new-rule-format`). See the [transforms](#transforms) section below for a list of available transforms.
+
+`path` - Files or directory to transform.
+
+
+For more information on jscodeshift, check their official [docs](https://github.com/facebook/jscodeshift).
+
+## Transforms
+
+### new-rule-format
+
+Transform that migrates an ESLint rule definition from the old format:
+
+```javascript
+module.exports = function(context) { ... }
+```
+
+to the new format, introduced in ESLint 2.10.0:
+
+```javascript
+module.exports = {
+ meta: {
+     docs: {},
+     schema: []
+ },
+ create: function(context) { ... }
+};
+```
