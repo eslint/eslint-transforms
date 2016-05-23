@@ -30,6 +30,8 @@ For more information on jscodeshift, check their official [docs](https://github.
 
 ### new-rule-format
 
+**Please note**: The transform will not work for rules that use ES6 modules syntax.
+
 Transform that migrates an ESLint rule definition from the old format:
 
 ```javascript
