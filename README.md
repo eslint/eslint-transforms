@@ -4,17 +4,22 @@ A collection of jscodeshift transforms to help upgrade ESLint rules to new versi
 
 ## Installation
 
-Clone this repository and install its dependencies:
+You can install the ESLint transforms tool using [npm](https://npmjs.com):
 
 ```
-$ git clone https://github.com/eslint/eslint-transforms.git
-$ npm install
+$ npm install eslint-transforms --save-dev
 ```
 
 ## Usage
 
 ```
-npm run <transform-name> -- <path>
+$ eslint-transforms <transform-name> <path>
+```
+
+or
+
+```
+$ npm run <transform-name> -- <path>
 ```
 
 Where:
