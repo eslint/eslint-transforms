@@ -16,12 +16,6 @@ $ npm install eslint-transforms --save-dev
 $ eslint-transforms <transform-name> <path>
 ```
 
-or
-
-```
-$ npm run <transform-name> -- <path>
-```
-
 Where:
 
 `transform-name` - Name of the transform you want to run (e.g. `new-rule-format`). See the [transforms](#transforms) section below for a list of available transforms.
