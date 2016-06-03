@@ -33,13 +33,14 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
       "utf8"
     );
 
-    var output = transform(
-      { path: inputPath, source: source },
-      { jscodeshift: jscodeshift },
-      {}
-    );
-
     it("transforms correctly using \"" + transformFixturePrefix + "\" fixture", function() {
+
+        var output = transform(
+          { path: inputPath, source: source },
+          { jscodeshift: jscodeshift },
+          {}
+        );
+
         expect(
             (output || "").trim()
         ).to.equal(
