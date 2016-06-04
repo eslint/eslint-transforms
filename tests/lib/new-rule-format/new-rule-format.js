@@ -94,6 +94,13 @@ describe("New Rule Format transform", function() {
         "already-transformed",
 
         // tests that the transform also works when the rule definition is an arrow function
-        "arrow-function"
+        "arrow-function",
+
+        // tests that the transform works when the rule definition is wrapped in a function:
+        //
+        // module.exports = doSomething(function(context) {
+        //    return { ... };
+        // });
+        "wrapped-in-function"
     ]);
 });
