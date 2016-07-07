@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "jscodeshift": "^0.3.20",
-    "shelljs-nodecli": "^0.1.1"
+    "object-assign": "^4.1.0"
   },
   "keywords": [
     "javascript",
