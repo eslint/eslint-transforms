@@ -3,7 +3,6 @@
 "use strict";
 
 var execSync = require("child_process").execSync;
-var objectAssign = require("object-assign");
 var path = require("path");
 
 var argv = process.argv.slice(2);
@@ -18,7 +17,7 @@ var transform = argv[0];
  */
 function execWithNodeModules(cmd) {
     var SEPARATOR = process.platform === "win32" ? ";" : ":",
-        env = objectAssign({}, process.env);
+        env = Object.assign({}, process.env);
 
     env.PATH = [
         // Covers case when npm flattens dependencies and the jscodeshift bin will be directly under the root

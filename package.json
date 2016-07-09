@@ -9,7 +9,7 @@
     "url": "https://github.com/eslint/eslint-transforms"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4"
   },
   "bin": {
     "eslint-transforms": "./bin/eslint-transforms.js"
@@ -31,8 +31,7 @@
     "mocha": "^2.5.3"
   },
   "dependencies": {
-    "jscodeshift": "^0.3.20",
-    "object-assign": "^4.1.0"
+    "jscodeshift": "^0.3.20"
   },
   "keywords": [
     "javascript",
