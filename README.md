@@ -1,6 +1,7 @@
 # ESLint Transforms
 
 A collection of jscodeshift transforms to help upgrade ESLint rules to new versions of [ESLint](https://github.com/eslint/eslint).
+Supports [Node.js](https://nodejs.org) version 4 or above.
 
 ## Installation
 
