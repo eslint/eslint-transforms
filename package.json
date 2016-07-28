@@ -21,7 +21,10 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint && mocha ./tests/lib/**/*.js",
-    "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js"
+    "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js",
+    "alpharelease": "eslint-prerelease alpha",
+    "betarelease": "eslint-prerelease beta",
+    "release": "eslint-release"
   },
   "devDependencies": {
     "chai": "^3.5.0",
