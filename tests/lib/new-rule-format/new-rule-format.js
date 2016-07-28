@@ -9,10 +9,24 @@
 
 var jscodeshift = require("jscodeshift");
 var fs = require("fs");
+var os = require("os");
 var path = require("path");
 var expect = require("chai").expect;
 
 var newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
+
+/**
+ * Returns a new string with all the EOL markers from the string passed in
+ * replaced with the Operating System specific EOL marker.
+ * Useful for guaranteeing two transform outputs have the same EOL marker format.
+ *
+ * @param {string} input - the string which will have its EOL markers replaced
+ * @returns {string} a new string with all EOL markers replaced
+ * @private
+ */
+function normalizeLineEndngs(input) {
+    return input.replace(/(\r\n|\n|\r)/gm, os.EOL);
+}
 
 /**
  * Run a transform against a fixture file and compare results with expected output.
@@ -21,8 +35,9 @@ var newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-form
  * `tests/fixtures/` folder.
  *
  * @param {Function} transform - transform to test against
- * @param {String} transformFixturePrefix - prefix of fixture files
+ * @param {string} transformFixturePrefix - prefix of fixture files
  * @returns {void}
+ * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
     var fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
@@ -42,9 +57,9 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
         );
 
         expect(
-            (output || "").trim()
+            normalizeLineEndngs((output || "").trim())
         ).to.equal(
-            expectedOutput.trim()
+            normalizeLineEndngs(expectedOutput.trim())
         );
     });
 }
@@ -57,8 +72,9 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
  * `tests/fixtures/` folder.
  *
  * @param {Function} transform - transform to test against
- * @param {String[]} fixtures - list of fixture prefixes
+ * @param {string[]} fixtures - list of fixture prefixes
  * @returns {void}
+ * @private
  */
 function testTransformWithFixtures(transform, fixtures) {
     return fixtures.forEach(function(fixture) {
