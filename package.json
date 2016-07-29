@@ -24,13 +24,14 @@
     "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js",
     "alpharelease": "eslint-prerelease alpha",
     "betarelease": "eslint-prerelease beta",
-    "release": "eslint-release"
+    "release": "eslint-release",
+    "ci-release": "eslint-ci-release"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^2.9.0",
     "eslint-config-eslint": "^3.0.0",
-    "eslint-release": "^0.5.0",
+    "eslint-release": "^0.6.4",
     "mocha": "^2.5.3"
   },
   "dependencies": {
