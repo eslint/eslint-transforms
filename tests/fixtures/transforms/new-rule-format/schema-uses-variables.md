@@ -1,0 +1,1 @@
+tests that the transform can handle rules that have a schema definition that depends on variables that were declared above it

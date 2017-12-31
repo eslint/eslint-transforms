@@ -1,0 +1,1 @@
+tests that the transform also works when the rule definition is an arrow function

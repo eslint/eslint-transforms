@@ -13,7 +13,8 @@ var os = require("os");
 var path = require("path");
 var expect = require("chai").expect;
 
-var newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
+var fixturesRootPath = path.join(__dirname, "../fixtures/transforms");
+
 
 /**
  * Returns a new string with all the EOL markers from the string passed in
@@ -40,7 +41,7 @@ function normalizeLineEndngs(input) {
  * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
-    var fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
+    var fixtureDir = path.join(fixturesRootPath, transform.name);
     var inputPath = path.join(fixtureDir, transformFixturePrefix + ".input.js");
     var source = fs.readFileSync(inputPath, "utf8");
     var expectedOutput = fs.readFileSync(
@@ -50,7 +51,7 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
 
     it("transforms correctly using \"" + transformFixturePrefix + "\" fixture", function() {
 
-        var output = transform(
+        var output = transform.fn(
           { path: inputPath, source: source },
           { jscodeshift: jscodeshift },
           {}
@@ -82,41 +83,73 @@ function testTransformWithFixtures(transform, fixtures) {
     });
 }
 
-describe("New Rule Format transform", function() {
-    testTransformWithFixtures(newRuleFormatTransform, [
-        // tests basic functionality of the transform
-        "simple",
+/**
+ * Determines if the file name is *.input.js
+ *
+ * @param {string} name - file name
+ * @returns {boolean} - does it match?
+ * @private
+*/
+function inputsFilter(name) {
+    return /\.input\.js$/.test(name);
+}
 
-        // tests that the transform can detect that a rule is fixable
-        "fixable",
+/**
+ * extracts <test-name> from <test-name>.input.js
+ *
+ * @param {string} name - file name
+ * @returns {string} - the test name
+ * @private
+ */
+function extractTestName(name) {
+    return name.split(".").shift();
+}
 
-        // tests that the transform can handle rules that have no schema being exported
-        "no-schema",
 
-        // tests that the transform can handle rules that use an identifier for the
-        // "context" object that is not "context", e.g.:
-        // customContextName.report({ ... });
-        "custom-identifier-context",
+/**
+ * Loads the transform module
+ *
+ * @param {string} name - the transform name
+ * @returns {function} - the module
+ * @private
+ */
+function loadTransformFn(name) {
+    return require("../../lib/transforms/" + name);
+}
 
-        // tests that the transform can handle rules that have a schema definition that
-        // depends on variables that were declared above it
-        "schema-uses-variables",
+/**
+ * loads a transform object
+ *
+ * @param {string} name - the name of the tranform
+ * @returns {object} - a transform object ({name, fn})
+ * @private
+ */
+function loadTransform(name) {
+    return {
+        name: name,
+        fn: loadTransformFn(name)
+    };
+}
 
-        // tests that the transform can handle comments in different nodes that will be
-        // moved around
-        "with-comments",
+/**
+ * defines a test suite for a transform
+ *
+ * @param {object} transform - {name, fn}
+ * @returns {void}
+ */
+function describeTransform(transform) {
+    describe(transform.name, function() {
+        var fixtureDir = path.join(fixturesRootPath, transform.name);
+        var tests = fs
+            .readdirSync(fixtureDir)
+            .filter(inputsFilter)
+            .map(extractTestName);
+        testTransformWithFixtures(transform, tests);
+    });
+}
 
-        // tests that the transform doesn't fail if the rule was already in the new format
-        "already-transformed",
+fs
+.readdirSync(fixturesRootPath)
+.map(loadTransform)
+.forEach(describeTransform);
 
-        // tests that the transform also works when the rule definition is an arrow function
-        "arrow-function",
-
-        // tests that the transform works when the rule definition is wrapped in a function:
-        //
-        // module.exports = doSomething(function(context) {
-        //    return { ... };
-        // });
-        "wrapped-in-function"
-    ]);
-});

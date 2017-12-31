@@ -1,0 +1,1 @@
+tests that the transform can handle comments in different nodes that will be moved around
