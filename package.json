@@ -19,17 +19,17 @@
     "lint": "eslint .",
     "test": "npm run lint && mocha ./tests/lib/**/*.js",
     "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js",
-    "alpharelease": "eslint-prerelease alpha",
-    "betarelease": "eslint-prerelease beta",
-    "release": "eslint-release",
-    "ci-release": "eslint-ci-release",
-    "gh-release": "eslint-gh-release"
+    "generate-release": "eslint-generate-release",
+    "generate-alpharelease": "eslint-generate-prerelease alpha",
+    "generate-betarelease": "eslint-generate-prerelease beta",
+    "generate-rcrelease": "eslint-generate-prerelease rc",
+    "publish-release": "eslint-publish-release"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^2.9.0",
     "eslint-config-eslint": "^3.0.0",
-    "eslint-release": "^0.10.1",
+    "eslint-release": "^1.0.0",
     "mocha": "^2.5.3"
   },
   "dependencies": {
