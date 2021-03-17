@@ -1,0 +1,1 @@
+tests that the transform can detect that a rule is fixable

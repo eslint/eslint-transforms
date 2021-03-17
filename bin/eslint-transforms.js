@@ -39,6 +39,6 @@ function execWithNodeModules(cmd) {
 execWithNodeModules([
     "jscodeshift",
     "-t",
-    path.resolve(__dirname, "../lib/" + transform + "/" + transform + ".js"),
+    path.resolve(__dirname, "../lib/transforms/" + transform + ".js"),
     args.join(" ")
 ].join(" "));

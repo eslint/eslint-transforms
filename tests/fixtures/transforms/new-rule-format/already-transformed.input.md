@@ -1,0 +1,1 @@
+tests that the transform doesn't fail if the rule was already in the new format
