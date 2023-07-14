@@ -2,11 +2,11 @@
 
 module.exports = function(context) {
     return {
-        Program(node) {
+        Program: function(node) {
             context.report({
-                node,
+                node: node,
                 message: "Unexpected use of comma operator.",
-                fix() {}
+                fix: function() {}
             });
         }
     };

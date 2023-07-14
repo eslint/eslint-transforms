@@ -1,4 +1,4 @@
-/* eslint-env es6 -- for test */
+/* eslint-env es6 */
 "use strict";
 
 module.exports = {
@@ -7,11 +7,11 @@ module.exports = {
         schema: []
     },
 
-    create(context) {
+    create: context => {
         return {
-            Program(node) {
+            Program: function(node) {
                 context.report({
-                    node,
+                    node: node,
                     message: "Unexpected use of comma operator."
                 });
             }

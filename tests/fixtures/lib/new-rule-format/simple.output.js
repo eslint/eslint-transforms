@@ -6,11 +6,11 @@ module.exports = {
         schema: []
     },
 
-    create(context) {
+    create: function(context) {
         return {
-            Program(node) {
+            Program: function(node) {
                 context.report({
-                    node,
+                    node: node,
                     message: "Unexpected use of comma operator."
                 });
             }
