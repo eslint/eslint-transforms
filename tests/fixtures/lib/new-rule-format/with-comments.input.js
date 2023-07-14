@@ -1,18 +1,19 @@
-/* eslint-disable valid-jsdoc */
-
 "use strict";
 
 /**
  * Rule definition
+ * @param context
  */
 module.exports = function(context) {
     return {
+
         /**
          * Above AST node type
+         * @param node
          */
-        Program: function(node) {
+        Program(node) {
             context.report({
-                node: node,
+                node,
                 message: "Unexpected use of comma operator."
             });
         }

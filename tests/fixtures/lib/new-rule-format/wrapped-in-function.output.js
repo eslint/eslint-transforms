@@ -1,6 +1,6 @@
 "use strict";
 
-var doSomething = require("doSomething");
+const doSomething = require("doSomething");
 
 module.exports = {
     meta: {
@@ -8,14 +8,12 @@ module.exports = {
         schema: []
     },
 
-    create: doSomething(function(context) {
-        return {
-            Program: function(node) {
-                context.report({
-                    node: node,
-                    message: "Unexpected use of comma operator."
-                });
-            }
-        };
-    })
+    create: doSomething(context => ({
+        Program(node) {
+            context.report({
+                node,
+                message: "Unexpected use of comma operator."
+            });
+        }
+    }))
 };

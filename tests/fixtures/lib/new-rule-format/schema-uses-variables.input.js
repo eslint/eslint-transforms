@@ -2,16 +2,16 @@
 
 module.exports = function(context) {
     return {
-        Program: function(node) {
+        Program(node) {
             context.report({
-                node: node,
+                node,
                 message: "Unexpected use of comma operator."
             });
         }
     };
 };
 
-var SCHEMA_STUFF = {
+const SCHEMA_STUFF = {
     enum: ["foo", "bar"]
 };
 

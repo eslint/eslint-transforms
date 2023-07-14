@@ -7,20 +7,19 @@
 
 "use strict";
 
-var jscodeshift = require("jscodeshift");
-var fs = require("fs");
-var os = require("os");
-var path = require("path");
-var expect = require("chai").expect;
+const jscodeshift = require("jscodeshift");
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+const expect = require("chai").expect;
 
-var newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
+const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
 
 /**
  * Returns a new string with all the EOL markers from the string passed in
  * replaced with the Operating System specific EOL marker.
  * Useful for guaranteeing two transform outputs have the same EOL marker format.
- *
- * @param {string} input - the string which will have its EOL markers replaced
+ * @param {string} input the string which will have its EOL markers replaced
  * @returns {string} a new string with all EOL markers replaced
  * @private
  */
@@ -33,27 +32,26 @@ function normalizeLineEndngs(input) {
  * The fixture file and expected output file should be named in the format
  * `prefix.input.js` and `prefix.output.js` and should be located in the
  * `tests/fixtures/` folder.
- *
- * @param {Function} transform - transform to test against
- * @param {string} transformFixturePrefix - prefix of fixture files
+ * @param {Function} transform transform to test against
+ * @param {string} transformFixturePrefix prefix of fixture files
  * @returns {void}
  * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
-    var fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
-    var inputPath = path.join(fixtureDir, transformFixturePrefix + ".input.js");
-    var source = fs.readFileSync(inputPath, "utf8");
-    var expectedOutput = fs.readFileSync(
-      path.join(fixtureDir, transformFixturePrefix + ".output.js"),
-      "utf8"
+    const fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
+    const inputPath = path.join(fixtureDir, `${transformFixturePrefix}.input.js`);
+    const source = fs.readFileSync(inputPath, "utf8");
+    const expectedOutput = fs.readFileSync(
+        path.join(fixtureDir, `${transformFixturePrefix}.output.js`),
+        "utf8"
     );
 
-    it("transforms correctly using \"" + transformFixturePrefix + "\" fixture", function() {
+    it(`transforms correctly using "${transformFixturePrefix}" fixture`, () => {
 
-        var output = transform(
-          { path: inputPath, source: source },
-          { jscodeshift: jscodeshift },
-          {}
+        const output = transform(
+            { path: inputPath, source },
+            { jscodeshift },
+            {}
         );
 
         expect(
@@ -70,20 +68,20 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
  * The fixture file and expected output file should be named in the format
  * `prefix.input.js` and `prefix.output.js` and should be located in the
  * `tests/fixtures/` folder.
- *
- * @param {Function} transform - transform to test against
- * @param {string[]} fixtures - list of fixture prefixes
+ * @param {Function} transform transform to test against
+ * @param {string[]} fixtures list of fixture prefixes
  * @returns {void}
  * @private
  */
 function testTransformWithFixtures(transform, fixtures) {
-    return fixtures.forEach(function(fixture) {
+    return fixtures.forEach(fixture => {
         testTransformWithFixture(transform, fixture);
     });
 }
 
-describe("New Rule Format transform", function() {
+describe("New Rule Format transform", () => {
     testTransformWithFixtures(newRuleFormatTransform, [
+
         // tests basic functionality of the transform
         "simple",
 

@@ -1,5 +1,3 @@
-/* eslint-disable valid-jsdoc */
-
 "use strict";
 
 /**
@@ -13,14 +11,16 @@ module.exports = {
         schema: []
     },
 
-    create: function(context) {
+    create(context) {
         return {
+
             /**
              * Above AST node type
+             * @param node
              */
-            Program: function(node) {
+            Program(node) {
                 context.report({
-                    node: node,
+                    node,
                     message: "Unexpected use of comma operator."
                 });
             }
