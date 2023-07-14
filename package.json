@@ -6,7 +6,7 @@
   "author": "Vitor Balocco",
   "repository": "eslint/eslint-transforms",
   "engines": {
-    "node": ">=4"
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "bin": {
     "eslint-transforms": "./bin/eslint-transforms.js"
