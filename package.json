@@ -18,18 +18,12 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint && mocha ./tests/lib/**/*.js",
-    "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js",
-    "generate-release": "eslint-generate-release",
-    "generate-alpharelease": "eslint-generate-prerelease alpha",
-    "generate-betarelease": "eslint-generate-prerelease beta",
-    "generate-rcrelease": "eslint-generate-prerelease rc",
-    "publish-release": "eslint-publish-release"
+    "new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^2.9.0",
     "eslint-config-eslint": "^3.0.0",
-    "eslint-release": "^1.0.0",
     "mocha": "^2.5.3"
   },
   "dependencies": {
