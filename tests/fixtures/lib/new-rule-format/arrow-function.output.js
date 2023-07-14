@@ -1,4 +1,4 @@
-/* eslint-env es6 */
+/* eslint-env es6 -- for test */
 "use strict";
 
 module.exports = {

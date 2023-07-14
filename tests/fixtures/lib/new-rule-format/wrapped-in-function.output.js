@@ -1,6 +1,6 @@
 "use strict";
 
-const doSomething = require("doSomething");
+const doSomething = require("");
 
 module.exports = {
     meta: {

@@ -24,7 +24,7 @@ const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-fo
  * @private
  */
 function normalizeLineEndngs(input) {
-    return input.replace(/(\r\n|\n|\r)/gm, os.EOL);
+    return input.replace(/(\r\n|\n|\r)/gmu, os.EOL);
 }
 
 /**

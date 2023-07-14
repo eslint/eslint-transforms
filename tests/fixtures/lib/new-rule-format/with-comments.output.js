@@ -2,6 +2,7 @@
 
 /**
  * Rule definition
+ * @returns {Object} Rule definition object
  */
 module.exports = {
     meta: {
@@ -16,7 +17,8 @@ module.exports = {
 
             /**
              * Above AST node type
-             * @param node
+             * @param {Object} node The AST node being checked
+             * @returns {void}
              */
             Program(node) {
                 context.report({
