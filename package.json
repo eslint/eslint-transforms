@@ -27,9 +27,10 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^2.9.0",
-    "eslint-config-eslint": "^3.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-eslint": "^8.0.0",
     "eslint-release": "^1.0.0",
+    "globals": "^13.20.0",
     "mocha": "^2.5.3"
   },
   "dependencies": {
