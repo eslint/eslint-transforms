@@ -16,7 +16,6 @@
     "lib"
   ],
   "scripts": {
-    "build:new-rule-format": "node ./bin/eslint-transforms.js -t ./lib/new-rule-format/new-rule-format.js",
     "lint": "eslint .",
     "release:generate:latest": "eslint-generate-release",
     "release:generate:alpha": "eslint-generate-prerelease alpha",
