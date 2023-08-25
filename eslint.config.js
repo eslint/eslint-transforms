@@ -1,13 +1,13 @@
 "use strict";
 
-const eslintConfig = require("eslint-config-eslint");
+const eslintConfigESLintCJS = require("eslint-config-eslint/cjs");
 const globals = require("globals");
 
 module.exports = [
     {
         ignores: ["tests/fixtures/"]
     },
-    ...eslintConfig,
+    ...eslintConfigESLintCJS,
     {
         files: ["tests/**/*"],
         languageOptions: {
