@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.1](https://github.com/eslint/eslint-transforms/compare/v2.0.0...v2.0.1) (2023-10-23)
+
+
+### Chores
+
+* run tests in Node.js 21 ([#22](https://github.com/eslint/eslint-transforms/issues/22)) ([77e4775](https://github.com/eslint/eslint-transforms/commit/77e477522ac43e188dfc445ed6dc31ceba78b8c7))
+* standardize npm script names ([#19](https://github.com/eslint/eslint-transforms/issues/19)) ([a1582e3](https://github.com/eslint/eslint-transforms/commit/a1582e3da4c00d25efb90fdf410d22d5598b9889))
+* use eslint-config-eslint@9.0.0 ([#20](https://github.com/eslint/eslint-transforms/issues/20)) ([432f885](https://github.com/eslint/eslint-transforms/commit/432f8852636a076b3cc3b4cb1b30d840c0f814e6))
+
 ## [2.0.0](https://github.com/eslint/eslint-transforms/compare/v1.0.0...v2.0.0) (2023-07-21)
 
 
