@@ -11,7 +11,7 @@ const jscodeshift = require("jscodeshift");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const expect = require("chai").expect;
+const assert = require("assert");
 
 const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
 
@@ -54,9 +54,8 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
             {}
         );
 
-        expect(
-            normalizeLineEndngs((output || "").trim())
-        ).to.equal(
+        assert.strictEqual(
+            normalizeLineEndngs((output || "").trim()),
             normalizeLineEndngs(expectedOutput.trim())
         );
     });
