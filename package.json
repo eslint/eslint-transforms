@@ -6,7 +6,7 @@
   "author": "Vitor Balocco",
   "repository": "eslint/eslint-transforms",
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+    "node": ">=20"
   },
   "bin": {
     "eslint-transforms": "./bin/eslint-transforms.js"
@@ -25,19 +25,18 @@
     "test": "mocha ./tests/lib/**/*.js"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "eslint": "^8.45.0",
     "eslint-config-eslint": "^9.0.0",
     "eslint-release": "^1.0.0",
     "globals": "^13.20.0",
-    "mocha": "^2.5.3"
-  },
-  "dependencies": {
-    "jscodeshift": "^0.3.20"
+    "mocha": "^10.4.0"
   },
   "keywords": [
     "javascript",
     "eslint",
     "jscodeshift"
-  ]
+  ],
+  "dependencies": {
+    "jscodeshift": "^0.15.2"
+  }
 }
