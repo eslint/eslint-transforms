@@ -25,10 +25,10 @@
     "test": "mocha ./tests/lib/**/*.js"
   },
   "devDependencies": {
-    "eslint": "^8.45.0",
-    "eslint-config-eslint": "^9.0.0",
+    "eslint": "^9.2.0",
+    "eslint-config-eslint": "^10.0.0",
     "eslint-release": "^1.0.0",
-    "globals": "^13.20.0",
+    "globals": "^15.2.0",
     "mocha": "^10.4.0"
   },
   "keywords": [
