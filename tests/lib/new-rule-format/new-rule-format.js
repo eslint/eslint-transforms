@@ -9,23 +9,11 @@
 
 const jscodeshift = require("jscodeshift");
 const fs = require("fs");
-const os = require("os");
 const path = require("path");
 const assert = require("assert");
 
 const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
-
-/**
- * Returns a new string with all the EOL markers from the string passed in
- * replaced with the Operating System specific EOL marker.
- * Useful for guaranteeing two transform outputs have the same EOL marker format.
- * @param {string} input the string which will have its EOL markers replaced
- * @returns {string} a new string with all EOL markers replaced
- * @private
- */
-function normalizeLineEndngs(input) {
-    return input.replace(/(\r\n|\n|\r)/gmu, os.EOL);
-}
+const { normalizeLineEndngs } = require("../../utils");
 
 /**
  * Run a transform against a fixture file and compare results with expected output.

@@ -10,6 +10,7 @@ const path = require("path");
 const { applyTransform } = require("@hypermod/utils");
 const assert = require("assert");
 const sinon = require("sinon");
+const { normalizeLineEndngs } = require("../../utils");
 const v9MigrationTransform = require("../../../lib/v9-migration/v9-migration");
 
 describe("v9 migration transform", () => {
@@ -25,13 +26,13 @@ describe("v9 migration transform", () => {
         );
 
         assert.strictEqual(
-            result,
-            `
+            normalizeLineEndngs(result),
+            normalizeLineEndngs(`
             const sourceCode = context.sourceCode ?? context.getSourceCode();
             const cwd = context.cwd ?? context.getCwd();
             const filename = context.filename ?? context.getFilename();
             const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
-            `.trim()
+            `.trim())
         );
     });
 
@@ -50,8 +51,8 @@ describe("v9 migration transform", () => {
         );
 
         assert.strictEqual(
-            result,
-            `
+            normalizeLineEndngs(result),
+            normalizeLineEndngs(`
             const sourceCode = context.sourceCode.getText();
             const sourceLines = context.sourceCode.getLines();
             const allComments = context.sourceCode.getAllComments();
@@ -59,7 +60,7 @@ describe("v9 migration transform", () => {
             const commentsBefore = context.sourceCode.getCommentsBefore(nodeOrToken);
             const commentsAfter = context.sourceCode.getCommentsAfter(nodeOrToken);
             const commentsInside = context.sourceCode.getCommentsInside(nodeOrToken);
-            `.trim()
+            `.trim())
         );
     });
 
