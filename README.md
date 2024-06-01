@@ -51,6 +51,8 @@ module.exports = {
 
 ### v9-rule-migration
 
+Transform that migrates an ESLint rule definition from the old Rule API:
+
 ```javascript
 module.exports = {
     create(context) {
@@ -86,7 +88,7 @@ module.exports = {
 };
 ```
 
-to the new Rule API introduced in ESLint 9.0.0:
+to the new [Rule API introduced in ESLint 9.0.0](https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/):
 
 ```javascript
 module.exports = {
