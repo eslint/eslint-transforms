@@ -13,7 +13,7 @@ const path = require("path");
 const assert = require("assert");
 
 const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
-const { normalizeLineEndngs } = require("../../utils");
+const { normalizeLineEndings } = require("../../utils");
 
 /**
  * Run a transform against a fixture file and compare results with expected output.
@@ -26,8 +26,14 @@ const { normalizeLineEndngs } = require("../../utils");
  * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
-    const fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
-    const inputPath = path.join(fixtureDir, `${transformFixturePrefix}.input.js`);
+    const fixtureDir = path.join(
+        __dirname,
+        "../../fixtures/lib/new-rule-format"
+    );
+    const inputPath = path.join(
+        fixtureDir,
+        `${transformFixturePrefix}.input.js`
+    );
     const source = fs.readFileSync(inputPath, "utf8");
     const expectedOutput = fs.readFileSync(
         path.join(fixtureDir, `${transformFixturePrefix}.output.js`),
@@ -35,7 +41,6 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
     );
 
     it(`transforms correctly using "${transformFixturePrefix}" fixture`, () => {
-
         const output = transform(
             { path: inputPath, source },
             { jscodeshift },
@@ -43,8 +48,8 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
         );
 
         assert.strictEqual(
-            normalizeLineEndngs((output || "").trim()),
-            normalizeLineEndngs(expectedOutput.trim())
+            normalizeLineEndings((output || "").trim()),
+            normalizeLineEndings(expectedOutput.trim())
         );
     });
 }

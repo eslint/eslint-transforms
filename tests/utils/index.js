@@ -10,10 +10,10 @@ const os = require("os");
  * @returns {string} a new string with all EOL markers replaced
  * @private
  */
-function normalizeLineEndngs(input) {
+function normalizeLineEndings(input) {
     return input.replace(/(\r\n|\n|\r)/gmu, os.EOL);
 }
 
 module.exports = {
-    normalizeLineEndngs
+    normalizeLineEndings
 };

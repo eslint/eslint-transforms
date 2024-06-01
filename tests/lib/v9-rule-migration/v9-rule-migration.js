@@ -10,7 +10,7 @@ const path = require("path");
 const { applyTransform } = require("@hypermod/utils");
 const assert = require("assert");
 const sinon = require("sinon");
-const { normalizeLineEndngs } = require("../../utils");
+const { normalizeLineEndings } = require("../../utils");
 const v9MigrationTransform = require("../../../lib/v9-rule-migration/v9-rule-migration");
 
 describe("v9 migration transform", () => {
@@ -27,6 +27,13 @@ describe("v9 migration transform", () => {
                             const filename = context.getFilename();
                             const physicalFilename = context.getPhysicalFilename();
                         },
+
+                        FunctionDeclaration(node) {
+                            const _sourceCode = context.getSourceCode();
+                            const _cwd = context.getCwd();
+                            const _filename = context.getFilename();
+                            const _physicalFilename = context.getPhysicalFilename();
+                        }
                     };
                 }
             };
@@ -34,19 +41,24 @@ describe("v9 migration transform", () => {
         );
 
         assert.strictEqual(
-            normalizeLineEndngs(result),
-            normalizeLineEndngs(
+            normalizeLineEndings(result),
+            normalizeLineEndings(
                 `
             module.exports = {
                 create(context) {
+                    const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
+                    const filename = context.filename ?? context.getFilename();
+                    const cwd = context.cwd ?? context.getCwd();
                     const sourceCode = context.sourceCode ?? context.getSourceCode();
                     return {
-                        Program(node) {
-                            const sourceCode = sourceCode;
-                            const cwd = context.cwd ?? context.getCwd();
-                            const filename = context.filename ?? context.getFilename();
-                            const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
-                        },
+                        Program(node) {},
+
+                        FunctionDeclaration(node) {
+                            const _sourceCode = sourceCode;
+                            const _cwd = cwd;
+                            const _filename = filename;
+                            const _physicalFilename = physicalFilename;
+                        }
                     };
                 }
             };
@@ -114,8 +126,8 @@ describe("v9 migration transform", () => {
         );
 
         assert.strictEqual(
-            normalizeLineEndngs(result),
-            normalizeLineEndngs(
+            normalizeLineEndings(result),
+            normalizeLineEndings(
                 `
             module.exports = {
                 create(context) {
@@ -184,6 +196,7 @@ describe("v9 migration transform", () => {
                         Program(node) {
                             const scope = context.getScope();
                             const result = context.markVariableAsUsed("foo");
+                            const statements = context.getAncestors().filter(node => node.endsWith("Statement"));
                         },
 
                         MemberExpression(memberExpressionNode) {
@@ -200,8 +213,8 @@ describe("v9 migration transform", () => {
         );
 
         assert.strictEqual(
-            normalizeLineEndngs(result),
-            normalizeLineEndngs(
+            normalizeLineEndings(result),
+            normalizeLineEndings(
                 `
             module.exports = {
                 create(context) {
@@ -210,6 +223,7 @@ describe("v9 migration transform", () => {
                         Program(node) {
                             const scope = sourceCode.getScope ? sourceCode.getScope(node) : context.getScope();
                             const result = sourceCode.markVariableAsUsed ? sourceCode.markVariableAsUsed("foo", node) : context.markVariableAsUsed();
+                            const statements = (sourceCode.getAncestors ? sourceCode.getAncestors(node) : context.getAncestors()).filter(node => node.endsWith("Statement"));
                         },
 
                         MemberExpression(memberExpressionNode) {
