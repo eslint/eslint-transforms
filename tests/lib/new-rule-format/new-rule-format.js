@@ -9,23 +9,11 @@
 
 const jscodeshift = require("jscodeshift");
 const fs = require("fs");
-const os = require("os");
 const path = require("path");
 const assert = require("assert");
 
 const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
-
-/**
- * Returns a new string with all the EOL markers from the string passed in
- * replaced with the Operating System specific EOL marker.
- * Useful for guaranteeing two transform outputs have the same EOL marker format.
- * @param {string} input the string which will have its EOL markers replaced
- * @returns {string} a new string with all EOL markers replaced
- * @private
- */
-function normalizeLineEndngs(input) {
-    return input.replace(/(\r\n|\n|\r)/gmu, os.EOL);
-}
+const { normalizeLineEndings } = require("../../utils");
 
 /**
  * Run a transform against a fixture file and compare results with expected output.
@@ -38,8 +26,14 @@ function normalizeLineEndngs(input) {
  * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
-    const fixtureDir = path.join(__dirname, "../../fixtures/lib/new-rule-format");
-    const inputPath = path.join(fixtureDir, `${transformFixturePrefix}.input.js`);
+    const fixtureDir = path.join(
+        __dirname,
+        "../../fixtures/lib/new-rule-format"
+    );
+    const inputPath = path.join(
+        fixtureDir,
+        `${transformFixturePrefix}.input.js`
+    );
     const source = fs.readFileSync(inputPath, "utf8");
     const expectedOutput = fs.readFileSync(
         path.join(fixtureDir, `${transformFixturePrefix}.output.js`),
@@ -47,7 +41,6 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
     );
 
     it(`transforms correctly using "${transformFixturePrefix}" fixture`, () => {
-
         const output = transform(
             { path: inputPath, source },
             { jscodeshift },
@@ -55,8 +48,8 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
         );
 
         assert.strictEqual(
-            normalizeLineEndngs((output || "").trim()),
-            normalizeLineEndngs(expectedOutput.trim())
+            normalizeLineEndings((output || "").trim()),
+            normalizeLineEndings(expectedOutput.trim())
         );
     });
 }
