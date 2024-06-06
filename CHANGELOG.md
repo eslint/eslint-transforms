@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0](https://github.com/eslint/eslint-transforms/compare/v2.0.0...v3.0.0) (2024-06-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade dependencies; set Node.js to 20 ([#26](https://github.com/eslint/eslint-transforms/issues/26))
+
+### Features
+
+* add transform for v9 migration ([#29](https://github.com/eslint/eslint-transforms/issues/29)) ([528b94f](https://github.com/eslint/eslint-transforms/commit/528b94ffd12b63aa8aad8aabdc38fd5223860d02))
+* Upgrade dependencies; set Node.js to 20 ([#26](https://github.com/eslint/eslint-transforms/issues/26)) ([018e28b](https://github.com/eslint/eslint-transforms/commit/018e28b2ab374267ea0a73e3a045b74aff7023b3))
+
 ## [2.0.0](https://github.com/eslint/eslint-transforms/compare/v1.0.0...v2.0.0) (2023-07-21)
 
 
