@@ -1,6 +1,6 @@
 {
   "name": "eslint-transforms",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Codemods for upgrading eslint rules",
   "license": "MIT",
   "author": "Vitor Balocco",
