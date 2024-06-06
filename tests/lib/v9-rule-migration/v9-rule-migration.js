@@ -67,6 +67,44 @@ describe("v9 migration transform", () => {
         );
     });
 
+    it("should migrate deprecated context methods to new properties #2", async () => {
+        const result = await applyTransform(
+            v9MigrationTransform,
+            `
+            module.exports = {
+                create(context) {
+                    const sourceCode = context.getSourceCode();
+                    const cwd = context.getCwd();
+                    const filename = context.getFilename();
+                    const physicalFilename = context.getPhysicalFilename();
+                    return {
+                        Program(node) {},
+                    };
+                }
+            };
+            `
+        );
+
+        assert.strictEqual(
+            normalizeLineEndings(result),
+            normalizeLineEndings(
+                `
+            module.exports = {
+                create(context) {
+                    const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
+                    const filename = context.filename ?? context.getFilename();
+                    const cwd = context.cwd ?? context.getCwd();
+                    const sourceCode = context.sourceCode ?? context.getSourceCode();
+                    return {
+                        Program(node) {},
+                    };
+                }
+            };
+            `.trim()
+            )
+        );
+    });
+
     it("should migrate deprecated context methods to SourceCode", async () => {
         const result = await applyTransform(
             v9MigrationTransform,
