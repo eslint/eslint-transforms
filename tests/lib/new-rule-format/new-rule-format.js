@@ -8,9 +8,9 @@
 "use strict";
 
 const jscodeshift = require("jscodeshift");
-const fs = require("fs");
-const path = require("path");
-const assert = require("assert");
+const fs = require("node:fs");
+const path = require("node:path");
+const assert = require("node:assert");
 
 const newRuleFormatTransform = require("../../../lib/new-rule-format/new-rule-format");
 const { normalizeLineEndings } = require("../../utils");

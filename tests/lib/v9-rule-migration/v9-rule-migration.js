@@ -6,9 +6,9 @@
 
 "use strict";
 
-const path = require("path");
+const path = require("node:path");
 const { applyTransform } = require("@hypermod/utils");
-const assert = require("assert");
+const assert = require("node:assert");
 const sinon = require("sinon");
 const { normalizeLineEndings } = require("../../utils");
 const v9MigrationTransform = require("../../../lib/v9-rule-migration/v9-rule-migration");

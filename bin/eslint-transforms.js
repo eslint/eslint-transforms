@@ -2,8 +2,8 @@
 
 "use strict";
 
-const execSync = require("child_process").execSync;
-const path = require("path");
+const execSync = require("node:child_process").execSync;
+const path = require("node:path");
 
 const argv = process.argv.slice(2);
 const args = argv.slice(1);
