@@ -1,6 +1,6 @@
 "use strict";
 
-const os = require("os");
+const os = require("node:os");
 
 /**
  * Returns a new string with all the EOL markers from the string passed in
