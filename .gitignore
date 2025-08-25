@@ -3,3 +3,7 @@ npm-debug.log
 .DS_Store
 .eslint-release-info.json
 package-lock.json
+.vscode
+*.code-workspace
+.idea
+.cursor
