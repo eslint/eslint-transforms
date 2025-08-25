@@ -11,7 +11,7 @@ const os = require("node:os");
  * @private
  */
 function normalizeLineEndings(input) {
-    return input.replace(/(\r\n|\n|\r)/gmu, os.EOL);
+    return input.replace(/(\r\n|\n|\r)/gu, os.EOL);
 }
 
 module.exports = {
