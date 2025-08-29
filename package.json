@@ -17,18 +17,12 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "release:generate:latest": "eslint-generate-release",
-    "release:generate:alpha": "eslint-generate-prerelease alpha",
-    "release:generate:beta": "eslint-generate-prerelease beta",
-    "release:generate:rc": "eslint-generate-prerelease rc",
-    "release:publish": "eslint-publish-release",
     "test": "mocha ./tests/lib/**/*.js"
   },
   "devDependencies": {
     "@hypermod/utils": "^0.4.2",
     "eslint": "^9.34.0",
     "eslint-config-eslint": "^12.0.0",
-    "eslint-release": "^1.0.0",
     "globals": "^15.2.0",
     "mocha": "^10.4.0",
     "sinon": "^18.0.0"
