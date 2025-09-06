@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "@hypermod/utils": "^0.4.2",
-    "eslint": "^9.34.0",
-    "eslint-config-eslint": "^12.0.0",
+    "eslint": "^9.35.0",
+    "eslint-config-eslint": "^13.0.0",
     "globals": "^15.2.0",
     "mocha": "^10.4.0",
     "sinon": "^18.0.0"
