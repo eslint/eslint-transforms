@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha ./tests/lib/**/*.js"
+    "test": "mocha tests/**/*.test.js"
   },
   "devDependencies": {
     "@hypermod/utils": "^0.4.2",
