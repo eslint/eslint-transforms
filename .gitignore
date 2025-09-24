@@ -7,3 +7,6 @@ package-lock.json
 *.code-workspace
 .idea
 .cursor
+
+# Automatically generated files by GitHub Actions workflow
+tools/update-readme.js
