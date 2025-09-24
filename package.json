@@ -16,7 +16,8 @@
     "lib"
   ],
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "test": "mocha tests/**/*.test.js"
   },
   "devDependencies": {
