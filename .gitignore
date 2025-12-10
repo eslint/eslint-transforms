@@ -8,5 +8,8 @@ package-lock.json
 .idea
 .cursor
 
+# Output of 'npm pack'
+*.tgz
+
 # Automatically generated files by GitHub Actions workflow
 /.shared-workflows
