@@ -13,7 +13,7 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
-          token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}        
+          token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}
 
       - uses: actions/checkout@v6
         if: ${{ steps.release.outputs.release_created }}
