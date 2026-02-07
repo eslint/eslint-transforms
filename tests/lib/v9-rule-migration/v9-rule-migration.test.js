@@ -14,10 +14,10 @@ const { normalizeLineEndings } = require("../../utils");
 const v9MigrationTransform = require("../../../lib/v9-rule-migration/v9-rule-migration");
 
 describe("v9 migration transform", () => {
-    it("should migrate deprecated context methods to new properties", async () => {
-        const result = await applyTransform(
-            v9MigrationTransform,
-            `
+	it("should migrate deprecated context methods to new properties", async () => {
+		const result = await applyTransform(
+			v9MigrationTransform,
+			`
             module.exports = {
                 create(context) {
                     return {
@@ -37,13 +37,13 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `
-        );
+            `,
+		);
 
-        assert.strictEqual(
-            normalizeLineEndings(result),
-            normalizeLineEndings(
-                `
+		assert.strictEqual(
+			normalizeLineEndings(result),
+			normalizeLineEndings(
+				`
             module.exports = {
                 create(context) {
                     const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
@@ -62,15 +62,15 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `.trim()
-            )
-        );
-    });
+            `.trim(),
+			),
+		);
+	});
 
-    it("should migrate deprecated context methods to new properties #2", async () => {
-        const result = await applyTransform(
-            v9MigrationTransform,
-            `
+	it("should migrate deprecated context methods to new properties #2", async () => {
+		const result = await applyTransform(
+			v9MigrationTransform,
+			`
             module.exports = {
                 create(context) {
                     const sourceCode = context.getSourceCode();
@@ -82,13 +82,13 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `
-        );
+            `,
+		);
 
-        assert.strictEqual(
-            normalizeLineEndings(result),
-            normalizeLineEndings(
-                `
+		assert.strictEqual(
+			normalizeLineEndings(result),
+			normalizeLineEndings(
+				`
             module.exports = {
                 create(context) {
                     const physicalFilename = context.physicalFilename ?? context.getPhysicalFilename();
@@ -100,15 +100,15 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `.trim()
-            )
-        );
-    });
+            `.trim(),
+			),
+		);
+	});
 
-    it("should migrate deprecated context methods to SourceCode", async () => {
-        const result = await applyTransform(
-            v9MigrationTransform,
-            `
+	it("should migrate deprecated context methods to SourceCode", async () => {
+		const result = await applyTransform(
+			v9MigrationTransform,
+			`
             module.exports = {
                 create(context) {
                     return {
@@ -160,13 +160,13 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `
-        );
+            `,
+		);
 
-        assert.strictEqual(
-            normalizeLineEndings(result),
-            normalizeLineEndings(
-                `
+		assert.strictEqual(
+			normalizeLineEndings(result),
+			normalizeLineEndings(
+				`
             module.exports = {
                 create(context) {
                     const sourceCode = context.sourceCode ?? context.getSourceCode();
@@ -219,15 +219,15 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `.trim()
-            )
-        );
-    });
+            `.trim(),
+			),
+		);
+	});
 
-    it("should migrate recently added methods on sourceCode with signature change", async () => {
-        const result = await applyTransform(
-            v9MigrationTransform,
-            `
+	it("should migrate recently added methods on sourceCode with signature change", async () => {
+		const result = await applyTransform(
+			v9MigrationTransform,
+			`
             module.exports = {
                 create(context) {
                     return {
@@ -247,13 +247,13 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `
-        );
+            `,
+		);
 
-        assert.strictEqual(
-            normalizeLineEndings(result),
-            normalizeLineEndings(
-                `
+		assert.strictEqual(
+			normalizeLineEndings(result),
+			normalizeLineEndings(
+				`
             module.exports = {
                 create(context) {
                     const sourceCode = context.sourceCode ?? context.getSourceCode();
@@ -274,35 +274,35 @@ describe("v9 migration transform", () => {
                     };
                 }
             };
-            `.trim()
-            )
-        );
-    });
+            `.trim(),
+			),
+		);
+	});
 
-    it("should warn about context.getComments()", async () => {
-        const spy = sinon.spy(console, "warn");
+	it("should warn about context.getComments()", async () => {
+		const spy = sinon.spy(console, "warn");
 
-        await applyTransform(v9MigrationTransform, {
-            source: "const comments = context.getComments();",
-            path: path.resolve(__dirname, __filename)
-        });
+		await applyTransform(v9MigrationTransform, {
+			source: "const comments = context.getComments();",
+			path: path.resolve(__dirname, __filename),
+		});
 
-        assert.strictEqual(spy.callCount, 1);
-        assert.match(
-            spy.args[0][0],
-            /1:17 The "getComments\(\)" method has been removed. Please use "getCommentsBefore\(\)", "getCommentsAfter\(\)", or "getCommentsInside\(\)" instead/u
-        );
+		assert.strictEqual(spy.callCount, 1);
+		assert.match(
+			spy.args[0][0],
+			/1:17 The "getComments\(\)" method has been removed. Please use "getCommentsBefore\(\)", "getCommentsAfter\(\)", or "getCommentsInside\(\)" instead/u,
+		);
 
-        spy.restore();
-    });
+		spy.restore();
+	});
 
-    it("should warn about codePath.currentSegments", async () => {
-        const spy = sinon.spy(console, "warn");
-        const filePath = path.resolve(__dirname, __filename);
+	it("should warn about codePath.currentSegments", async () => {
+		const spy = sinon.spy(console, "warn");
+		const filePath = path.resolve(__dirname, __filename);
 
-        await applyTransform(v9MigrationTransform, {
-            path: filePath,
-            source: `
+		await applyTransform(v9MigrationTransform, {
+			path: filePath,
+			source: `
                 module.exports = {
                     meta: {
                         docs: {},
@@ -320,19 +320,19 @@ describe("v9 migration transform", () => {
                         };
                     }
                 }
-                `
-        });
+                `,
+		});
 
-        assert.strictEqual(spy.callCount, 2);
-        assert.match(
-            spy.args[0][0],
-            /10:56 The "CodePath#currentSegments" property has been removed and it can't be migrated automatically/u
-        );
-        assert.match(
-            spy.args[1][0],
-            /14:56 The "CodePath#currentSegments" property has been removed and it can't be migrated automatically/u
-        );
+		assert.strictEqual(spy.callCount, 2);
+		assert.match(
+			spy.args[0][0],
+			/10:56 The "CodePath#currentSegments" property has been removed and it can't be migrated automatically/u,
+		);
+		assert.match(
+			spy.args[1][0],
+			/14:56 The "CodePath#currentSegments" property has been removed and it can't be migrated automatically/u,
+		);
 
-        spy.restore();
-    });
+		spy.restore();
+	});
 });

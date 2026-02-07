@@ -1,9 +1,9 @@
 {
-    "bootstrap-sha": "23d0bfee341723fcbf641795a1f990a9fc937db2",
-    "packages": {
-        ".": {
-            "release-type": "node",
-            "pull-request-title-pattern": "chore: release ${version} 🚀"
-        }
+  "bootstrap-sha": "23d0bfee341723fcbf641795a1f990a9fc937db2",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "pull-request-title-pattern": "chore: release ${version} 🚀"
     }
+  }
 }

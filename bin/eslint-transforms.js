@@ -15,31 +15,32 @@ const transform = argv[0];
  * @returns {void}
  */
 function execWithNodeModules(cmd) {
-    const SEPARATOR = process.platform === "win32" ? ";" : ":",
-        env = Object.assign({}, process.env);
+	const SEPARATOR = process.platform === "win32" ? ";" : ":",
+		env = Object.assign({}, process.env);
 
-    env.PATH = [
+	env.PATH = [
+		// Covers case when npm flattens dependencies and the jscodeshift bin will be directly under the root
+		// node_modules folder
+		path.resolve("./node_modules/.bin"),
 
-        // Covers case when npm flattens dependencies and the jscodeshift bin will be directly under the root
-        // node_modules folder
-        path.resolve("./node_modules/.bin"),
+		// Covers case when dependencies are not flattened and the jscodeshift bin can be found under the
+		// node_modules folder of our package
+		path.resolve(__dirname, "../node_modules/.bin"),
+		env.PATH,
+	].join(SEPARATOR);
 
-        // Covers case when dependencies are not flattened and the jscodeshift bin can be found under the
-        // node_modules folder of our package
-        path.resolve(__dirname, "../node_modules/.bin"),
-        env.PATH
-    ].join(SEPARATOR);
-
-    execSync(cmd, {
-        env,
-        cwd: process.cwd(),
-        stdio: "inherit"
-    });
+	execSync(cmd, {
+		env,
+		cwd: process.cwd(),
+		stdio: "inherit",
+	});
 }
 
-execWithNodeModules([
-    "jscodeshift",
-    "-t",
-    path.resolve(__dirname, `../lib/${transform}/${transform}.js`),
-    args.join(" ")
-].join(" "));
+execWithNodeModules(
+	[
+		"jscodeshift",
+		"-t",
+		path.resolve(__dirname, `../lib/${transform}/${transform}.js`),
+		args.join(" "),
+	].join(" "),
+);
