@@ -23,7 +23,7 @@
     "test": "mocha \"tests/**/*.test.js\""
   },
   "devDependencies": {
-    "@hypermod/utils": "^0.4.2",
+    "@hypermod/utils": "^0.7.0",
     "eslint": "^9.39.2",
     "eslint-config-eslint": "^13.0.0",
     "globals": "^17.0.0",
