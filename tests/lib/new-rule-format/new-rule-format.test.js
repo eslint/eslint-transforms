@@ -26,32 +26,32 @@ const { normalizeLineEndings } = require("../../utils");
  * @private
  */
 function testTransformWithFixture(transform, transformFixturePrefix) {
-    const fixtureDir = path.join(
-        __dirname,
-        "../../fixtures/lib/new-rule-format"
-    );
-    const inputPath = path.join(
-        fixtureDir,
-        `${transformFixturePrefix}.input.js`
-    );
-    const source = fs.readFileSync(inputPath, "utf8");
-    const expectedOutput = fs.readFileSync(
-        path.join(fixtureDir, `${transformFixturePrefix}.output.js`),
-        "utf8"
-    );
+	const fixtureDir = path.join(
+		__dirname,
+		"../../fixtures/lib/new-rule-format",
+	);
+	const inputPath = path.join(
+		fixtureDir,
+		`${transformFixturePrefix}.input.js`,
+	);
+	const source = fs.readFileSync(inputPath, "utf8");
+	const expectedOutput = fs.readFileSync(
+		path.join(fixtureDir, `${transformFixturePrefix}.output.js`),
+		"utf8",
+	);
 
-    it(`transforms correctly using "${transformFixturePrefix}" fixture`, () => {
-        const output = transform(
-            { path: inputPath, source },
-            { jscodeshift },
-            {}
-        );
+	it(`transforms correctly using "${transformFixturePrefix}" fixture`, () => {
+		const output = transform(
+			{ path: inputPath, source },
+			{ jscodeshift },
+			{},
+		);
 
-        assert.strictEqual(
-            normalizeLineEndings((output || "").trim()),
-            normalizeLineEndings(expectedOutput.trim())
-        );
-    });
+		assert.strictEqual(
+			normalizeLineEndings((output || "").trim()),
+			normalizeLineEndings(expectedOutput.trim()),
+		);
+	});
 }
 
 /**
@@ -66,47 +66,46 @@ function testTransformWithFixture(transform, transformFixturePrefix) {
  * @private
  */
 function testTransformWithFixtures(transform, fixtures) {
-    return fixtures.forEach(fixture => {
-        testTransformWithFixture(transform, fixture);
-    });
+	return fixtures.forEach(fixture => {
+		testTransformWithFixture(transform, fixture);
+	});
 }
 
 describe("New Rule Format transform", () => {
-    testTransformWithFixtures(newRuleFormatTransform, [
+	testTransformWithFixtures(newRuleFormatTransform, [
+		// tests basic functionality of the transform
+		"simple",
 
-        // tests basic functionality of the transform
-        "simple",
+		// tests that the transform can detect that a rule is fixable
+		"fixable",
 
-        // tests that the transform can detect that a rule is fixable
-        "fixable",
+		// tests that the transform can handle rules that have no schema being exported
+		"no-schema",
 
-        // tests that the transform can handle rules that have no schema being exported
-        "no-schema",
+		// tests that the transform can handle rules that use an identifier for the
+		// "context" object that is not "context", e.g.:
+		// customContextName.report({ ... });
+		"custom-identifier-context",
 
-        // tests that the transform can handle rules that use an identifier for the
-        // "context" object that is not "context", e.g.:
-        // customContextName.report({ ... });
-        "custom-identifier-context",
+		// tests that the transform can handle rules that have a schema definition that
+		// depends on variables that were declared above it
+		"schema-uses-variables",
 
-        // tests that the transform can handle rules that have a schema definition that
-        // depends on variables that were declared above it
-        "schema-uses-variables",
+		// tests that the transform can handle comments in different nodes that will be
+		// moved around
+		"with-comments",
 
-        // tests that the transform can handle comments in different nodes that will be
-        // moved around
-        "with-comments",
+		// tests that the transform doesn't fail if the rule was already in the new format
+		"already-transformed",
 
-        // tests that the transform doesn't fail if the rule was already in the new format
-        "already-transformed",
+		// tests that the transform also works when the rule definition is an arrow function
+		"arrow-function",
 
-        // tests that the transform also works when the rule definition is an arrow function
-        "arrow-function",
-
-        // tests that the transform works when the rule definition is wrapped in a function:
-        //
-        // module.exports = doSomething(function(context) {
-        //    return { ... };
-        // });
-        "wrapped-in-function"
-    ]);
+		// tests that the transform works when the rule definition is wrapped in a function:
+		//
+		// module.exports = doSomething(function(context) {
+		//    return { ... };
+		// });
+		"wrapped-in-function",
+	]);
 });

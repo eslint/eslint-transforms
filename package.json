@@ -18,14 +18,17 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
+    "fmt": "prettier --write .",
+    "fmt:check": "prettier --check .",
     "test": "mocha \"tests/**/*.test.js\""
   },
   "devDependencies": {
     "@hypermod/utils": "^0.4.2",
-    "eslint": "^9.35.0",
+    "eslint": "^9.39.2",
     "eslint-config-eslint": "^13.0.0",
     "globals": "^17.0.0",
     "mocha": "^11.0.0",
+    "prettier": "3.8.1",
     "sinon": "^21.0.0"
   },
   "keywords": [
