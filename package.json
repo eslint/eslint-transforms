@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@hypermod/utils": "^0.4.2",
-    "eslint": "^9.39.2",
-    "eslint-config-eslint": "^13.0.0",
+    "eslint": "^10.0.0",
+    "eslint-config-eslint": "^14.0.0",
     "globals": "^17.0.0",
     "mocha": "^11.0.0",
     "prettier": "3.8.1",
